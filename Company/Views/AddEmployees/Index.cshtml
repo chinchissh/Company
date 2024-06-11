@@ -1,0 +1,228 @@
+﻿@model Company.ViewModels.AddEmployeesViewModel
+@{
+    Layout = "_LayoutNone";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добавление новых сотрудников</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', sans-serif;
+            background: linear-gradient(to bottom right, #fbc2eb, #a18cd1);
+            margin: 0;
+            padding: 0;
+        }
+
+        header, footer {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            z-index: 999;
+        }
+
+        header {
+            top: 0;
+        }
+
+        footer {
+            bottom: 0;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-top: 60px;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"] {
+            width: calc(100% - 20px);
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            width: calc(100% - 20px);
+            margin: 10px auto 0;
+        }
+
+            button[type="submit"]:hover {
+                background-color: #0056b3;
+            }
+
+        .validation-message {
+            color: red;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .return-button {
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+            .return-button:hover {
+                background-color: #555;
+            }
+        .anchor {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, rgba(255, 192, 203, 0.7), rgba(255, 215, 0, 0.7), rgba(144, 238, 144, 0.7), rgba(135, 206, 250, 0.7), rgba(147, 112, 219, 0.7), rgba(255, 160, 122, 0.7), rgba(250, 128, 114, 0.7));
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+
+            .anchor:hover {
+                box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.15);
+            }
+
+            .anchor:active {
+                box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.15);
+            }
+
+        .anchor-up {
+            bottom: auto;
+            top: 20px;
+        }
+
+        .anchor svg {
+            fill: #fff;
+            width: 24px;
+            height: 24px;
+        }
+    </style>
+</head>
+<body>
+    <h2 style ="margin-top: 50px">Добавление новых сотрудников</h2>
+    <form style="margin-top: 10px; margin-bottom: 100px" asp-action="AddEmployees" method="post">
+        <div>
+            <label asp-for="ФИО">ФИО:</label>
+            <input asp-for="ФИО" />
+            <span asp-validation-for="ФИО"></span>
+        </div>
+        <div>
+            <label asp-for="Пол">Пол:</label>
+            <input asp-for="Пол" />
+            <span asp-validation-for="Пол"></span>
+        </div>
+        <div>
+            <label asp-for="Дата_рождения">Дата рождения:</label>
+            <input asp-for="Дата_рождения" />
+            <span asp-validation-for="Дата_рождения"></span>
+        </div>
+        <div>
+            <label asp-for="СНИЛС">СНИЛС:</label>
+            <input asp-for="СНИЛС" />
+            <span asp-validation-for="СНИЛС"></span>
+        </div>
+        <div>
+            <label asp-for="Мобильный_телефон">Мобильный телефон:</label>
+            <input asp-for="Мобильный_телефон" />
+            <span asp-validation-for="Мобильный_телефон"></span>
+        </div>
+        <div>
+            <label asp-for="Адрес_электронной_почты">Адрес электронной почты:</label>
+            <input asp-for="Адрес_электронной_почты" />
+            <span asp-validation-for="Адрес_электронной_почты"></span>
+        </div>
+        <div>
+            <label asp-for="Адрес_проживания">Адрес проживания:</label>
+            <input asp-for="Адрес_проживания" />
+            <span asp-validation-for="Адрес_проживания"></span>
+        </div>
+        <div>
+            <label asp-for="Должность">Должность:</label>
+            <input asp-for="Должность" />
+            <span asp-validation-for="Должность"></span>
+        </div>
+        <div>
+            <label asp-for="Код_аккаунта">Код аккаунта:</label>
+            <input asp-for="Код_аккаунта" />
+            <span asp-validation-for="Код_аккаунта"></span>
+        </div>
+        <div>
+            <label asp-for="Код_статуса">Код статуса:</label>
+            <input asp-for="Код_статуса" />
+            <span asp-validation-for="Код_статуса"></span>
+        </div>
+        <div>
+            <label asp-for="Код_сотрудника">Код сотрудника:</label>
+            <input asp-for="Код_сотрудника" />
+            <span asp-validation-for="Код_сотрудника"></span>
+        </div>
+        <button type="submit">Добавить</button>
+    </form>
+    <div class="button-container">
+        <form method="get" action="/MenuAdmin/Index">
+            <button type="submit" class="return-button">Вернуться в меню для администраторов</button>
+        </form>
+    </div>
+    <a href="#" class="anchor anchor-up" onclick="scrollToTop()">&uarr;</a>
+    <a href="#bottom" class="anchor anchor-down" onclick="scrollToBottom()">&darr;</a>
+
+    <script>
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        function scrollToBottom() {
+            const bottom = document.getElementById('bottom');
+            bottom.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+    <a id="bottom"></a>
+</body>
+</html>

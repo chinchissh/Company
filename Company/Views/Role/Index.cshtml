@@ -1,0 +1,208 @@
+﻿@model IEnumerable<Company.Models.Роли>
+@{
+    Layout = "_LayoutNone";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Список ролей</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background: linear-gradient(to bottom right, #fbc2eb, #a18cd1);
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            margin-top: 200px;
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background-color: #fff;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .return-button {
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+            .return-button:hover {
+                background-color: #555;
+            }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+            .close:hover,
+            .close:focus {
+                color: black;
+                text-decoration: none;
+            }
+        .anchor {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, rgba(255, 192, 203, 0.7), rgba(255, 215, 0, 0.7), rgba(144, 238, 144, 0.7), rgba(135, 206, 250, 0.7), rgba(147, 112, 219, 0.7), rgba(255, 160, 122, 0.7), rgba(250, 128, 114, 0.7));
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+
+            .anchor:hover {
+                box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.15);
+            }
+
+            .anchor:active {
+                box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.15);
+            }
+
+        .anchor-up {
+            bottom: auto;
+            top: 20px;
+        }
+
+        .anchor svg {
+            fill: #fff;
+            width: 24px;
+            height: 24px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Список ролей</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Код роли</th>
+                <th>Название роли</th>
+                <th>Дата начала действия</th>
+                <th>Дата окончания действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var role in Model)
+            {
+                <tr class="role-row">
+                    <td>@role.Код_роли</td>
+                    <td>@role.Название_роли</td>
+                    <td>@role.Дата_начала_действия</td>
+                    <td>@role.Дата_окончания_действия</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div id="role-info-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="role-info"></div>
+        </div>
+    </div>
+    <div class="button-container">
+        <form method="get" action="/Home/Index">
+            <button type="submit" class="return-button">Вернуться на главную страницу</button>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".role-row").click(function () {
+                var rowData = $(this).find("td").map(function () {
+                    return $(this).text();
+                }).get();
+
+                var cardHtml = "<div><b>Код роли:</b> " + rowData[0] + "</div>" +
+                    "<div><b>Название роли:</b> " + rowData[1] + "</div>" +
+                    "<div><b>Дата начала действия:</b> " + rowData[2] + "</div>" +
+                    "<div><b>Дата окончания действия:</b> " + rowData[3] + "</div>";
+
+                $("#role-info").html(cardHtml);
+                $("#role-info-modal").css("display", "block");
+            });
+
+            $(".close").click(function () {
+                $("#role-info-modal").css("display", "none");
+            });
+        });
+    </script>
+    <a href="#" class="anchor anchor-up" onclick="scrollToTop()">&uarr;</a>
+    <a href="#bottom" class="anchor anchor-down" onclick="scrollToBottom()">&darr;</a>
+
+    <script>
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        function scrollToBottom() {
+            const bottom = document.getElementById('bottom');
+            bottom.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+    <a id="bottom"></a>
+</body>
+</html>

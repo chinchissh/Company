@@ -1,0 +1,38 @@
+﻿body {
+    font-family: sans-serif;
+    position: relative;
+    height: 100vh;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.button-container {
+    text-align: center;
+    margin-top: 50px;
+}
+
+a {
+    font-size: 1.5rem;
+    display: block;
+    width: 200px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 15px;
+    background-color: #000;
+    color: lightsteelblue;
+    text-decoration: none;
+    border: 1px solid #000;
+    transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+}
+
+    a:hover {
+        background-color: #fff;
+        border-color: #000;
+        color: gold;
+    }
+
+    a:active {
+        transform: translateY(1px);
+    }
